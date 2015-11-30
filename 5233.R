@@ -28,7 +28,7 @@ speciesPP <- surveys %>%
 pdf("figures/histogram.pdf")
 
 qplot(hindfoot_length, data=speciesPP, ylab= "Frequency", xlab = "hindfoot_length(mm)", binwidth = 1, geom = "histogram")
-
+dev.off()
 ## mean hindfoot length per species
 
 # filter surveys and select columns
@@ -48,7 +48,7 @@ allspecies <- surveys %>%
  pdf("figures/bargraph.pdf")
  
 ggplot(data=avg, aes(x=species, y=x)) +xlab("species") + ylab("Mean hindfoot_length (g)") + geom_bar(stat="identity") +coord_flip()
-   
+dev.off()   
    
 # weight maniculatus vs weight ordii
 # filter and select columns
@@ -69,10 +69,7 @@ combine <- rbind(maniculatus, ordii)
 #create box plot
 pdf("figures/boxplot.pdf")
 ggplot(data = combine, aes(x=species, y=weight, fill=species)) + xlab("Species") + ylab("Weight(g)") + geom_boxplot() + scale_fill_discrete(name="p-value 2.2e-16")
-
+dev.off()
 # statistical test
 
 t.test(weight~species, data=combine)
-
-# create geom point
-ggplot(data = surveys, aes(x=weight, y=hindfoot_length)) + geom_point()
